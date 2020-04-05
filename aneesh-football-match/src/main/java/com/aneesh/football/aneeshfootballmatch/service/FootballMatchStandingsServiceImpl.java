@@ -1,5 +1,6 @@
 package com.aneesh.football.aneeshfootballmatch.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,41 +21,39 @@ public class FootballMatchStandingsServiceImpl implements FootballMatchStandings
 	RestClientImpl restClient;
 
 	@Override
-	public FootBallMatchDto findFootBallMatchStandings(String countryName, String leagueName, String teamName) {
-		// TODO Auto-generated method stub
-		
-		Stream<Country> countryStream = restClient.getAllCountries().stream();
-		
-		List<Country> filteredCountrylist= countryStream.filter(cs ->
-			cs.getCountryName().equals(countryName)
-		).collect(Collectors.toList());
-		
-//		countryStream.filter(cs ->
-//		cs.getCountryName().equals(countryName)
-//	).map(fcs ->{
-//		restClient.getLeagues(fcs.getCountryId()).stream().filter(fln ->leagueName.equals(fln)).
-//				map(filteredLeage -> {
-//					restClient.findStandings(filteredLeage.getLeagueId());
-//				}).collect(Collectors.toList()
-//	});
-		FootBallMatchDto footBallMatchDto = new FootBallMatchDto();
-		
+	public List<FootBallMatchDto> findFootBallMatchStandings(String countryName, String leagueName, String teamName) {
+	
+		List<FootBallMatchDto> listfbm= new ArrayList<>();
+
+		List<Standings>standinglist= null;
 	List<Country> countryList=	restClient.getAllCountries();
+	
 		for(Country cl:countryList) {
 			if(cl.getCountryName().equals(countryName)) {
 			List<Leagues> leagueList=	restClient.getLeagues(cl.getCountryId());
+			
+			if(leagueList !=null && !leagueList.isEmpty() ) {
 			for(Leagues le:leagueList) {
 				if(le.getLeagueName().equals(leagueName)) {
-					List<Standings>standinglist=restClient.findStandings(le.getLeagueId());
+					standinglist=restClient.findStandings(le.getLeagueId());
 					for(Standings st: standinglist) {
-						footBallMatchDto.setAwayLeagueD(st.getAwayLeagueD());
+						if(st.getTeamName().equals(teamName)) {
+						FootBallMatchDto fbmd = new FootBallMatchDto();
+						fbmd.setCountryName(st.getCountryName());
+						fbmd.setCountryId(cl.getCountryId());
+						fbmd.setLeagueName(st.getLeagueName());
+						fbmd.setAwayLeagueD(st.getAwayLeagueD());
+						fbmd.setTeamName(st.getTeamName());
+						listfbm.add(fbmd);
+						
+						}
 					}
 				}
 			}
 			}
+			}
 		}
-		
-		return footBallMatchDto;
+		return listfbm;
 	}
 
 }

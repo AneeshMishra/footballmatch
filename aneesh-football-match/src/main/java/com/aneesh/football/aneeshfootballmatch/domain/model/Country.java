@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Country{
 	
-	
+	Country(){
+		
+	}
 	  @JsonProperty("country_id")
 	private String countryId;
 	  
@@ -33,5 +35,10 @@ public class Country{
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
+	@Override
+	public String toString() {
+		return "Country [countryId=" + countryId + ", countryName=" + countryName + "]";
+	}
+	
 
 }

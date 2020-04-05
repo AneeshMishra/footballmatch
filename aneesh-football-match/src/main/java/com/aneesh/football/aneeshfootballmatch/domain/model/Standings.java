@@ -1,36 +1,99 @@
 package com.aneesh.football.aneeshfootballmatch.domain.model;
 
-public class Standings {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Standings {
+	
+			@JsonProperty("country_name")
 	    	private String countryName;
+			
+			@JsonProperty("league_id")
 			private String leagueId;
+			
+			@JsonProperty("league_name")
 			private String leagueName;
+			
+			@JsonProperty("team_id")
 			private String teamId;
+			
+			@JsonProperty("team_name")
 			private String teamName;
+			
+			@JsonProperty("overall_league_position")
 			private int overallLeaguePosition;
+			
+			@JsonProperty("overall_league_payed")
 			private int overallLeaguePayed;
+			
+			@JsonProperty("overall_league_W")
 			private int overallLeagueW;
+			
+			@JsonProperty("overall_league_D")
 			private int overallLeagueD;
+			
+			@JsonProperty("overall_league_L")
 			private int overallLeagueL;
+			
+			@JsonProperty("overall_league_GF")
 			private int overallLeagueGF;
+			
+			@JsonProperty("overall_league_GA")
 			private int overallLeagueGA;
+			
+			@JsonProperty("overall_league_PTS")
 			private int overallLeaguePTS;
+			
+			@JsonProperty("home_league_position")
 			private int homeLeaguePosition;
+			
+			@JsonProperty("home_league_payed")
 			private int homeLeaguePayed;
+			
+			@JsonProperty("home_league_W")
 			private int homeLeagueW;
+			
+			@JsonProperty("home_league_D")
 			private int homeLeagueD;
+			
+			@JsonProperty("home_league_L")
 			private int homeLeagueL;
+			
+			@JsonProperty("home_league_GF")
 			private int homeLeagueGF;
+			
+			@JsonProperty("home_league_GA")
 			private int homeLeagueGA;
+			
+			@JsonProperty("home_league_PTS")
 			private int homeLeaguePTS;
+			
+			@JsonProperty("away_league_position")
 			private int awayLeaguePosition;
+			
+			@JsonProperty("away_league_payed")
 			private int awayLeaguePayed;
+			
+			@JsonProperty("away_league_W")
 			private int awayLeagueW;
+			
+			@JsonProperty("away_league_D")
 			private int awayLeagueD;
+			
+			@JsonProperty("away_league_L")
 			private int awayLeagueL;
+			
+			@JsonProperty("away_league_GF")
 			private int awayLeagueGF;
+			
+			@JsonProperty("away_league_GA")
 			private int awayLeagueGA;
+			
+			@JsonProperty("away_league_PTS")
 			private int awayLeaguePTS;
+			
+			Standings(){
+				
+			}
 			public String getCountryName() {
 				return countryName;
 			}
@@ -204,6 +267,22 @@ public class Standings {
 			}
 			public void setAwayLeaguePTS(int awayLeaguePTS) {
 				this.awayLeaguePTS = awayLeaguePTS;
+			}
+			@Override
+			public String toString() {
+				return "Standings [countryName=" + countryName + ", leagueId=" + leagueId + ", leagueName=" + leagueName
+						+ ", teamId=" + teamId + ", teamName=" + teamName + ", overallLeaguePosition="
+						+ overallLeaguePosition + ", overallLeaguePayed=" + overallLeaguePayed + ", overallLeagueW="
+						+ overallLeagueW + ", overallLeagueD=" + overallLeagueD + ", overallLeagueL=" + overallLeagueL
+						+ ", overallLeagueGF=" + overallLeagueGF + ", overallLeagueGA=" + overallLeagueGA
+						+ ", overallLeaguePTS=" + overallLeaguePTS + ", homeLeaguePosition=" + homeLeaguePosition
+						+ ", homeLeaguePayed=" + homeLeaguePayed + ", homeLeagueW=" + homeLeagueW + ", homeLeagueD="
+						+ homeLeagueD + ", homeLeagueL=" + homeLeagueL + ", homeLeagueGF=" + homeLeagueGF
+						+ ", homeLeagueGA=" + homeLeagueGA + ", homeLeaguePTS=" + homeLeaguePTS
+						+ ", awayLeaguePosition=" + awayLeaguePosition + ", awayLeaguePayed=" + awayLeaguePayed
+						+ ", awayLeagueW=" + awayLeagueW + ", awayLeagueD=" + awayLeagueD + ", awayLeagueL="
+						+ awayLeagueL + ", awayLeagueGF=" + awayLeagueGF + ", awayLeagueGA=" + awayLeagueGA
+						+ ", awayLeaguePTS=" + awayLeaguePTS + "]";
 			}
 			
 			

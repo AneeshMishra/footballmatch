@@ -1,5 +1,6 @@
 package com.aneesh.football.aneeshfootballmatch.sync;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,10 @@ public class RestClientImpl implements RestClient {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
-		ResponseEntity<CountryDto> result = restTemplate
-				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,CountryDto.class);
+		ResponseEntity<Country[]> result = restTemplate
+				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,Country[].class);
 		
-		return result.getBody().getCountry();
+		return Arrays.asList(result.getBody());
 	}
 
 	@Override
@@ -59,28 +60,27 @@ public class RestClientImpl implements RestClient {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
-		ResponseEntity<LeaguesDto> result = restTemplate
-				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,LeaguesDto.class);
+		ResponseEntity<Leagues[]> result = restTemplate
+				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,Leagues[].class);
 		
-		return result.getBody().getLeague();
+		return Arrays.asList(result.getBody());
 	}
 
 	@Override
 	public List<Standings> findStandings(String leagueId) {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(API_FOOTBALL_BASE_URL)
-				.queryParam("action", "get_countries")
-				.queryParam("country_id", leagueId)
+				.queryParam("action", "get_standings")
+				.queryParam("league_id", leagueId)
 				.queryParam("APIkey", APIKEY);
 		
 		HttpHeaders headers = new HttpHeaders();
 		
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<?> entity = new HttpEntity<>(headers);
+		ResponseEntity<Standings[]> result = restTemplate
+				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,Standings[].class);
 		
-		ResponseEntity<StandingsDto> result = restTemplate
-				.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity,StandingsDto.class);
-		
-		return result.getBody().getStandings();
+		return Arrays.asList(result.getBody());
 	}
 
 }

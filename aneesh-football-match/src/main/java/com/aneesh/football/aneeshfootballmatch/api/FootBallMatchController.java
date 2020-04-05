@@ -1,5 +1,7 @@
 package com.aneesh.football.aneeshfootballmatch.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,10 @@ public class FootBallMatchController {
 	FootballMatchStandingsService footballMatchStandingsService;
 
 	@GetMapping(value = "/findStandings")
-	public ResponseEntity<FootBallMatchDto> findStandings(@RequestParam(required = true) String countryName,
+	public ResponseEntity<List<FootBallMatchDto>> findStandings(@RequestParam(required = true) String countryName,
 			@RequestParam(required = true) String leagueName, @RequestParam(required = true) String teamName) {
 
-		FootBallMatchDto history = footballMatchStandingsService.findFootBallMatchStandings(countryName, leagueName,
+		List<FootBallMatchDto> history = footballMatchStandingsService.findFootBallMatchStandings(countryName, leagueName,
 				teamName);
 
 		return ResponseEntity.ok(history);
